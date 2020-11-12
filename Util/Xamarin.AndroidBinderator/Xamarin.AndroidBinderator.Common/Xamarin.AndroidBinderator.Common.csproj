@@ -15,9 +15,9 @@
     <PackageProjectUrl>https://go.microsoft.com/fwlink/?linkid=2100525</PackageProjectUrl>
     <PackageLicenseUrl>https://go.microsoft.com/fwlink/?linkid=2100608</PackageLicenseUrl>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="MavenNet" Version="2.1.2" />
+    <ProjectReference Include="..\..\..\..\..\Geral\MavenNet\MavenNet\MavenNet.csproj" />
   </ItemGroup>
 
 </Project>

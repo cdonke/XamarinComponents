@@ -43,6 +43,8 @@ namespace AndroidBinderator
                 maven = MavenRepository.FromDirectory(config.MavenRepositoryLocation);
             else if (config.MavenRepositoryType == MavenRepoType.Url)
                 maven = MavenRepository.FromUrl(config.MavenRepositoryLocation);
+            else if (config.MavenRepositoryType == MavenRepoType.DevOps)
+                maven = MavenRepository.FromAzureDevOps(config.DevOpsRepository.Organization, config.DevOpsRepository.Feed, config.DevOpsRepository.PersonalAccessToken);
             else if (config.MavenRepositoryType == MavenRepoType.MavenCentral)
                 maven = MavenRepository.FromMavenCentral();
             else
@@ -246,7 +248,7 @@ namespace AndroidBinderator
                 }
                 catch (Exception ex)
                 {
-                    Logger?.Invoke(LogLevel.Error, ex.ToString());
+                    Logger?.Invoke(LogLevel.Error, $"\t\t{ex.Message}");
                 }
                 finally
                 {
@@ -264,9 +266,13 @@ namespace AndroidBinderator
                         using (var sw = File.Create(sourcesFile))
                             await astrm.CopyToAsync(sw);
                     }
+                    catch (HttpRequestException ex)
+                    {
+                        Logger?.Invoke(LogLevel.Error, $"\t\t{ex.Message}");
+                    }
                     catch (Exception ex)
                     {
-                        Logger?.Invoke(LogLevel.Error, ex.ToString());
+                        Logger?.Invoke(LogLevel.Error, $"\t\t{ex.ToString()}");
                     }
                     finally
                     {

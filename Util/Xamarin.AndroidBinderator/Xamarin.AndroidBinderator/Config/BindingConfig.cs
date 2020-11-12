@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AndroidBinderator.Model;
 using Newtonsoft.Json;
 
 namespace AndroidBinderator
@@ -16,6 +17,10 @@ namespace AndroidBinderator
 
 		[JsonProperty("mavenRepositoryLocation")]
 		public string MavenRepositoryLocation { get; set; } = null;
+
+		[JsonProperty("devOpsRepository")]
+		public DevOpsConfig DevOpsRepository { get; set; }
+
 
 		[JsonProperty("generatedDir")]
 		public string GeneratedDir { get; set; } = "generated";
@@ -48,8 +53,8 @@ namespace AndroidBinderator
 		public List<string> AdditionalProjects { get; set; } = new List<string>();
 
 		[JsonProperty("metadata")]
-		public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
-	}
+		public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();		
+    }
 
 	public class BindingConfigDebug
 	{
@@ -62,6 +67,7 @@ namespace AndroidBinderator
 		Url,
 		Directory,
 		Google,
-		MavenCentral
-	}
+		MavenCentral,
+        DevOps
+    }
 }
